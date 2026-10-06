@@ -1,0 +1,55 @@
+# LinienBlick | First Step: Beispiel fuer Cloudflare Pages, statische Dateien.
+# Diese Datei liegt ohne Dateiendung im Build-Ausgabeordner neben index.html.
+# Ein normaler Node-/Express-Server oder python http.server liest sie nicht.
+# Pages Functions / Worker-Antworten setzen diese Header selbst im Code.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(self), camera=(), microphone=()
+  Content-Security-Policy: base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'
+
+# Erste CSP-Grundlage: Einbettung und Formularziele begrenzen.
+# Noch keine vollstaendige Ressourcen-Allowlist. default-src, script-src usw.
+# spaeter mit echten Karten-, API- und Script-Quellen passend festlegen.
+# Geolocation bleibt fuer die eigene App erlaubt; Berechtigung fragt der Browser.
+
+# HTML und Konfigurationsdateien vor Wiederverwendung revalidieren.
+# no-cache erlaubt Speicherung, verlangt aber eine Gueltigkeitspruefung.
+/
+  Cache-Control: no-cache
+
+/*.html
+  Cache-Control: no-cache
+
+/site.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: no-cache
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: no-cache
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: no-cache
+
+# Kurze Cache-Zeit fuer aktuelle Assets mit unveraenderten Dateinamen.
+# Kein immutable: Dateiinhalt kann sich unter derselben URL noch aendern.
+/assets/*
+  Cache-Control: public, max-age=3600
+
+/favicon.ico
+  Cache-Control: public, max-age=3600
+
+# OPTIONALES BEISPIEL: Nach Festlegung des Pages-Projektnamens aktivieren,
+# um dessen Vorschau-/Nebendomain dauerhaft aus dem Suchindex zu halten.
+# https://DEIN-PROJEKT.pages.dev/*
+#   X-Robots-Tag: noindex
+# https://:version.DEIN-PROJEKT.pages.dev/*
+#   X-Robots-Tag: noindex
+
+# OPTIONALES HSTS: Erst nach verlaesslichem HTTPS-Betrieb aktivieren.
+# /*
+#   Strict-Transport-Security: max-age=31536000

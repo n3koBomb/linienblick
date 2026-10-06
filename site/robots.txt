@@ -1,0 +1,13 @@
+# LinienBlick | First Step: Crawler duerfen die Projektseite abrufen.
+# index.html verhindert im Aufbau die Indexierung per noindex.
+# Nicht Disallow: / setzen: Dann koennten Crawler das noindex nicht lesen.
+# robots.txt ist keine Zugriffskontrolle fuer private Daten.
+
+User-agent: *
+Disallow:
+
+# Erst nach Domain-Einrichtung und Freigabe der Indexierung aktivieren:
+# Sitemap: https://linienblick.com/sitemap.xml
+
+# Spaetere Crawl-Ausschluesse nur fuer tatsaechlich vorhandene Routen ergaenzen.
+# Nicht pauschal CSS, JavaScript, Icons oder Karten-UI-Ressourcen blockieren.

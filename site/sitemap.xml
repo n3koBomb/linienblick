@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LinienBlick | First Step: Vorlage fuer die spaetere oeffentliche Startseite.
+  linienblick.com durch die bestaetigte HTTPS-Domain ersetzen.
+  Noch nicht einreichen: index.html steht aktuell auf noindex.
+  Erst beim oeffentlichen Start nur erreichbare, indexierbare Canonical-URLs
+  auffuehren. Keine Login-, API-, Admin- oder nicht vorhandenen Sprachseiten.
+  lastmod erst ergaenzen, wenn echte relevante Inhaltsaenderungen bekannt sind.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://linienblick.com/</loc>
+  </url>
+</urlset>

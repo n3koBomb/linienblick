@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <!-- 01 | Zeichenkodierung zuerst; Zoom bleibt für alle nutzbar. -->
+        <meta charset="utf-8" />
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+        <!-- 02 | Seitentitel und Beschreibung pro Seite individuell pflegen. -->
+        <title>LinienBlick – Kontrolltagebuch für Düsseldorf</title>
+        <meta name="description"
+            content="LinienBlick: ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+        <meta name="application-name" content="LinienBlick" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+        <!-- ENTWICKLUNG: Zum öffentlichen Start durch die folgende Zeile ersetzen.
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    -->
+        <meta name="robots" content="noindex, nofollow" />
+
+        <!-- 03 | Browser-Oberfläche und native Formulare, passend zum CSS. -->
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#f8fafc"
+            media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0f172a"
+            media="(prefers-color-scheme: dark)" />
+
+        04 | Canonical
+
+        <link rel="canonical" href="https://linienblick.com/" />
+        <link rel="alternate" hreflang="en" href="https://linienblick.com/" />
+        <link rel="alternate" hreflang="de" href="https://linienblick.com/" />
+
+        <!-- 05 | Sprachalternativen: Beispiele, noch keine beschlossenen Sprachen.
+         Nur für vorhandene, übersetzte Seiten aktivieren. Jede Version muss
+         dieselben Alternativen einschließlich sich selbst zurückverlinken.
+         Jede übersetzte Seite erhält ihre eigene Canonical-URL.
+         x-default verweist hier auf die deutsche Startseite als Fallback.
+    <link rel="alternate" hreflang="de" href="https://linienblick.com/">
+    <link rel="alternate" hreflang="en" href="https://linienblick.com/en/">
+    <link rel="alternate" hreflang="ru" href="https://linienblick.com/ru/">
+    <link rel="alternate" hreflang="x-default" href="https://linienblick.com/">
+    -->
+
+        <!-- 06 | Open Graph für Linkvorschauen. URL/Bild folgen mit der Domain. -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="LinienBlick" />
+        <meta property="og:locale" content="de_DE" />
+        <meta property="og:title"
+            content="LinienBlick – Kontrolltagebuch für Düsseldorf" />
+        <meta property="og:description"
+            content="Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+        <!-- Für vollständige Linkvorschauen nach Domain-Einrichtung aktivieren.
+         Das Bild mit 1200 × 630 Pixeln liegt bereits im Projekt.
+    <meta property="og:url" content="https://linienblick.com/">
+    <meta property="og:image" content="https://linienblick.com/assets/images/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="LinienBlick – Kontrolltagebuch für Düsseldorf. Projekt im Aufbau.">
+    -->
+        <!-- Nur ergänzen, wenn diese Sprachversionen wirklich vorhanden sind.
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="de_DE">
+    -->
+
+        <!-- 07 | X verwendet weiterhin die Namen twitter:*. -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title"
+            content="LinienBlick – Kontrolltagebuch für Düsseldorf" />
+        <meta name="twitter:description"
+            content="Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+        <!-- Gemeinsam mit og:image und echter Domain aktivieren.
+    <meta name="twitter:image" content="https://linienblick.com/assets/images/social-preview.png">
+    <meta name="twitter:image:alt" content="LinienBlick – Kontrolltagebuch für Düsseldorf. Projekt im Aufbau.">
+    -->
+        <!-- twitter:site / twitter:creator erst bei einem echten Projektkonto. -->
+
+        <!-- 08 | Preload: nur Ressourcen für den ersten sichtbaren Seitenaufbau.
+         Aktuell nutzen wir Systemschriften, daher kein Font-Download.
+         Beispiel erst aktivieren, wenn die Datei vorhanden ist UND per
+         @font-face tatsächlich für den ersten Seitenaufbau verwendet wird.
+    <link rel="preload" href="/assets/fonts/interface-latin.woff2" as="font" type="font/woff2" crossorigin>
+    -->
+        <!-- Später bei sofort benötigten ES-Modulen (keine script-Datei vorhanden):
+    <link rel="modulepreload" href="/assets/js/app.js">
+    -->
+        <!-- Keine GTFS-Dateien, Kartentiles oder Social-Bilder vorladen.
+         CSS hier regulär laden; zusätzliche CSS-Preloads sind nicht nötig. -->
+
+        <!-- 09 | Vorhandene CSS-Dateien: Grundlage, danach App-Gestaltung. -->
+        <link rel="stylesheet" href="/assets/css/base.css" />
+        <link rel="stylesheet" href="/assets/css/app.css" />
+        <!-- Weitere Dateien erst verlinken, sobald sie vorhanden sind.
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/map.css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print">
+    -->
+
+        <!-- 10 | Vorläufiges Projektsymbol: SVG, ICO und Apple-Touch-Icon. -->
+        <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+        <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"
+            sizes="any" />
+        <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png"
+            sizes="180x180" />
+
+        <!-- 11 | App-Metadaten. Das Manifest allein bietet keinen Offlinebetrieb. -->
+        <link rel="manifest" href="/site.webmanifest" />
+
+        <!-- 12 | Strukturierte Daten für die aktuelle Projektseite.
+         Keine erfundenen Bewertungen, Preise oder Betreiberangaben.
+         Mit der echten Domain kann zusätzlich "url" ergänzt werden.
+         WebApplication erst ergänzen, wenn die App-Funktionen verfügbar sind. -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "LinienBlick",
+                "url": "https://linienblick.com",
+                "logo": "https://linienblick.com/public/assets/brand/main-logo.png",
+                "description": "Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie.",
+                "inLanguage": ["de", "us"],
+                "keywords": ["duesseldorf", "oepnv", "live", "ticket", "map", "timestamp"]
+            }
+        </script>
+    </head>
+
+    <body>
+        <!-- Platzhalter für die spätere App; der sichtbare Seitenheader folgt. -->
+        <main id="main-content" class="project-shell">
+            <p class="project-status">Projekt im Aufbau</p>
+            <h1>LinienBlick</h1>
+            <p>
+                Ein Kontrolltagebuch für Düsseldorf: Erlebte
+                Fahrkartenkontrollen mit Ort, Zeitpunkt und Linie
+                dokumentieren.
+            </p>
+        </main>
+    </body>
+
+</html>
