@@ -1,6 +1,4 @@
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import '../style/map.css';
+import * as L from '/public/vendor/leaflet/leaflet-src.esm.js';
 import { distanceInMeters, searchStops, stopsInBounds, validateDataset } from './stops.js';
 
 const CENTER = [51.2277, 6.7735];
@@ -11,6 +9,7 @@ const viewportOnly = byId('viewport-only');
 const list = byId('stop-results');
 const status = byId('map-status');
 const number = new Intl.NumberFormat('de');
+const mapConfig = window.LINIENBLICK_MAP_CONFIG;
 let stops = [];
 let selectedId = null;
 let location = null;
@@ -18,15 +17,12 @@ let positionMarker;
 let accuracyCircle;
 let pending = false;
 
-const map = L.map('map', { zoomControl: false, minZoom: 9, maxZoom: 19 }).setView(CENTER, 13);
+const map = L.map('map', { zoomControl: false, minZoom: mapConfig.minZoom, maxZoom: mapConfig.maxZoom }).setView(CENTER, 13);
 L.control.zoom({ position: 'bottomright', zoomInTitle: 'Vergrößern', zoomOutTitle: 'Verkleinern' }).addTo(map);
-const tiles = L.tileLayer(import.meta.env.VITE_TILE_URL || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Mitwirkende',
-}).addTo(map);
+const tiles = L.tileLayer(mapConfig.tileUrl, { maxZoom: mapConfig.maxZoom, attribution: mapConfig.attribution}).addTo(map);
 map.attributionControl.setPrefix('<a href="https://leafletjs.com/">Leaflet</a>');
 const markers = L.layerGroup().addTo(map);
-const renderer = L.canvas({ padding: 0.3 });
+const renderer = L.canvas({ padding: 0 });
 const selectionLayer = L.layerGroup().addTo(map);
 let tileFailures = 0;
 tiles.on('loading', () => { tileFailures = 0; });
@@ -161,7 +157,7 @@ async function loadStops() {
   byId('results-message').textContent = 'Haltestellen werden geladen.';
   list.setAttribute('aria-busy', 'true');
   try {
-    const response = await fetch('/data/stops-duesseldorf.json', { signal: AbortSignal.timeout(10000) });
+    const response = await fetch('/public/data/stops-duesseldorf.json', { signal: AbortSignal.timeout(10000) });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const dataset = validateDataset(await response.json());
     stops = dataset.stops;

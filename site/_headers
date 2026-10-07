@@ -23,7 +23,7 @@
 /*.html
   Cache-Control: no-cache
 
-/site.webmanifest
+/public/site.webmanifest
   Content-Type: application/manifest+json; charset=utf-8
   Cache-Control: no-cache
 
@@ -37,10 +37,10 @@
 
 # Kurze Cache-Zeit fuer aktuelle Assets mit unveraenderten Dateinamen.
 # Kein immutable: Dateiinhalt kann sich unter derselben URL noch aendern.
-/assets/*
+/public/assets/*
   Cache-Control: public, max-age=3600
 
-/favicon/*
+/public/favicon/*
   Cache-Control: public, max-age=3600
 
 # OPTIONALES BEISPIEL: Nach Festlegung des Pages-Projektnamens aktivieren,
@@ -55,5 +55,5 @@
 #   Strict-Transport-Security: max-age=31536000
 
 # GTFS-Ausschnitt bei jedem Abruf revalidieren.
-/data/*
+/public/data/*
   Cache-Control: no-cache
