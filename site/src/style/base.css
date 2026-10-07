@@ -1,0 +1,59 @@
+/* LinienBlick: eigene Gestaltung mit Düsseldorf-inspirierter Farbpalette. */
+:root {
+  color-scheme: light dark;
+  --brand-red: #e30018;
+  --brand-blue: #009fdf;
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+  --brand-gray: #a5a5a5;
+  /* Funktionale Farben: Blau/Grau für kleine Schrift bewusst dunkler. */
+  --color-background: var(--brand-white);
+  --color-surface: #f5f5f5;
+  --color-text: var(--brand-black);
+  --color-muted: #626262;
+  --color-accent: #006b98;
+  --color-heading: var(--brand-red);
+  --color-border: #dedede;
+  --color-focus: var(--brand-black);
+  --color-info-background: #eef8fc;
+  --color-info-text: #005477;
+  --color-divider: var(--brand-gray);
+  --content-width: 72rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  font-synthesis: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #111111;
+    --color-surface: #1c1c1c;
+    --color-text: var(--brand-white);
+    --color-muted: #c4c4c4;
+    --color-accent: #62cbf5;
+    --color-heading: #ff6575;
+    --color-border: #454545;
+    --color-focus: var(--brand-white);
+    --color-info-background: #102b37;
+    --color-info-text: #a5e1fa;
+    --color-divider: #626262;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 2rem; }
+body { margin: 0; background: var(--color-background); color: var(--color-text); }
+img, svg { display: block; max-width: 100%; height: auto; }
+button, input, select, textarea { font: inherit; }
+a { color: var(--color-accent); text-underline-offset: .22em; text-decoration-thickness: .09em; }
+a:hover { text-decoration-thickness: .15em; }
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 5px; }
+::selection { background: var(--brand-blue); color: var(--brand-black); }
+.container { width: min(100% - 3rem, var(--content-width)); margin-inline: auto; }
+.skip-link { position: absolute; inset: 1rem auto auto 1rem; z-index: 5; padding: .75rem 1rem; background: var(--color-background); transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+.eyebrow { margin: 0 0 1rem; color: var(--color-muted); font-size: .8rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+h1, h2, h3 { margin-top: 0; line-height: 1.12; letter-spacing: -.035em; }
+p { margin-top: 0; }
+@media (max-width: 34rem) { .container { width: min(100% - 2rem, var(--content-width)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
