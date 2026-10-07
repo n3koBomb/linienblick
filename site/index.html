@@ -8,9 +8,9 @@
             content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
         <!-- 02 | Seitentitel und Beschreibung pro Seite individuell pflegen. -->
-        <title>LinienBlick – Kontrolltagebuch für Düsseldorf</title>
+        <title>LinienBlick – Karte und Haltestellen für Düsseldorf</title>
         <meta name="description"
-            content="LinienBlick: ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+            content="Entdecke Düsseldorfs Haltestellen auf einer interaktiven Karte. Suche eine Haltestelle, erkunde deine Umgebung und finde dich im Stadtgebiet zurecht." />
         <meta name="application-name" content="LinienBlick" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -21,9 +21,9 @@
 
         <!-- 03 | Browser-Oberfläche und native Formulare, passend zum CSS. -->
         <meta name="color-scheme" content="light dark" />
-        <meta name="theme-color" content="#f8fafc"
+        <meta name="theme-color" content="#ffffff"
             media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0f172a"
+        <meta name="theme-color" content="#111111"
             media="(prefers-color-scheme: dark)" />
 
         <!-- 04 | Canonical -->
@@ -36,7 +36,6 @@
         x-default verweist hier auf die deutsche Startseite als Fallback.
         -->
         <link rel="alternate" hreflang="de" href="https://linienblick.com/">
-        <link rel="alternate" hreflang="en" href="https://linienblick.com/">
         <link rel="alternate" hreflang="x-default"
             href="https://linienblick.com/">
 
@@ -45,17 +44,17 @@
         <meta property="og:site_name" content="LinienBlick" />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:title"
-            content="LinienBlick – Kontrolltagebuch für Düsseldorf" />
+            content="LinienBlick – Karte und Haltestellen für Düsseldorf" />
         <meta property="og:description"
-            content="Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+            content="Interaktive Karte mit Düsseldorfer Haltestellen. Der erste Ausbauschritt des unabhängigen Kontrolltagebuchs LinienBlick." />
         <meta property="og:url" content="https://linienblick.com/">
         <meta property="og:image"
-            content="https://linienblick.com/public/assets/images/social-preview.png">
+            content="https://linienblick.com/assets/images/social-preview.png">
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:alt"
-            content="LinienBlick – Kontrolltagebuch für Düsseldorf. Projekt im Aufbau.">
+            content="LinienBlick – Karte und Haltestellen für Düsseldorf. Projekt im Aufbau.">
 
         <!-- Nur ergänzen, wenn diese Sprachversionen wirklich vorhanden sind.
         <meta property="og:locale:alternate" content="en_US">
@@ -65,13 +64,13 @@
         <!-- 07 | X verwendet weiterhin die Namen twitter:*. -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title"
-            content="LinienBlick – Kontrolltagebuch für Düsseldorf" />
+            content="LinienBlick – Karte und Haltestellen für Düsseldorf" />
         <meta name="twitter:description"
-            content="Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie." />
+            content="Interaktive Karte mit Düsseldorfer Haltestellen. Der erste Ausbauschritt des unabhängigen Kontrolltagebuchs LinienBlick." />
         <meta name="twitter:image"
             content="https://linienblick.com/assets/images/social-preview.png">
         <meta name="twitter:image:alt"
-            content="LinienBlick – Kontrolltagebuch für Düsseldorf. Projekt im Aufbau.">
+            content="LinienBlick – Karte und Haltestellen für Düsseldorf. Projekt im Aufbau.">
         <!-- twitter:site / twitter:creator erst bei einem echten Projektkonto. -->
 
         <!-- 08 | Preload: nur Ressourcen für den ersten sichtbaren Seitenaufbau.
@@ -95,23 +94,11 @@
         <link rel="stylesheet" href="/assets/css/print.css" media="print">
         -->
 
-        <!-- 10 | Vorläufiges Projektsymbol: SVG, ICO und Apple-Touch-Icon. -->
-        <!-- FAVICONS -->
-        <link rel="icon" type="image/x-icon"
-            href="./public/favicon/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" sizes="any"
-            href="./public/favicon/favicon.svg">
-        <link rel="icon" type="image/png" sizes="16x16"
-            href="./public/favicon/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32"
-            href="./public/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="192x192"
-            href="./public/favicon/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512"
-            href="./public/favicon/android-chrome-512x512.png" />
-
-        <!-- 11 | App-Metadaten. Das Manifest allein bietet keinen Offlinebetrieb. -->
-        <link rel="manifest" href="/site.webmanifest" />
+        <!-- 10 | Vorhandene Projekt-Icons. Vite veröffentlicht public/ am Root. -->
+        <link rel="icon" href="/favicon/favicon.ico" sizes="16x16 32x32 48x48">
+        <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" sizes="any">
+        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" sizes="180x180">
+        <link rel="manifest" href="/site.webmanifest">
 
         <!-- 12 | Strukturierte Daten für die aktuelle Projektseite.
         Keine erfundenen Bewertungen, Preise oder Betreiberangaben.
@@ -123,9 +110,9 @@
                 "@type": "WebSite",
                 "name": "LinienBlick",
                 "url": "https://linienblick.com",
-                "logo": "https://linienblick.com/public/assets/brand/main-logo.png",
-                "description": "Ein Webprojekt im Aufbau zur Dokumentation erlebter Fahrkartenkontrollen in Düsseldorf mit Ort, Zeitpunkt und Linie.",
-                "inLanguage": ["de", "us"],
+                "image": "https://linienblick.com/assets/images/linienblick-icon.png",
+                "description": "Interaktive Karte mit Düsseldorfer Haltestellen. Der erste Ausbauschritt des unabhängigen Kontrolltagebuchs LinienBlick.",
+                "inLanguage": "de",
                 "keywords": ["duesseldorf", "oepnv", "live", "ticket", "map", "timestamp"]
             }
         </script>
@@ -136,77 +123,73 @@
         <header class="site-header">
             <div class="container header-inner">
                 <a class="brand" href="/" aria-label="LinienBlick – Startseite">
-                    <img src="public/favicon/icon-192.png" alt width="192"
-                        height="192">
-                    <span><span class="brand-name">LinienBlick</span><span
-                            class="brand-place">Kontrolltagebuch für
-                            Düsseldorf</span></span>
+                    <img src="/favicon/icon-192.png" alt="" width="192" height="192">
+                    <span><span class="brand-name">LinienBlick</span><span class="brand-place">Düsseldorf entdecken</span></span>
                 </a>
                 <nav class="site-nav" aria-label="Hauptnavigation">
-                    <a href="#konzept">Das Konzept</a>
-                    <a href="#projektstand">Projektstand</a>
+                    <a href="#karte" aria-current="page">Karte</a>
+                    <a href="#projektinfo">Über LinienBlick</a>
                 </nav>
+                <span class="build-badge">Erster Ausbauschritt</span>
             </div>
         </header>
         <main id="main-content" class="container" tabindex="-1">
-            <section class="hero" aria-labelledby="hero-title">
+            <section class="map-intro" aria-labelledby="page-title">
                 <div>
-                    <p class="eyebrow">Unterwegs in Düsseldorf</p>
-                    <h1 id="hero-title">LinienBlick.<span>Für
-                            Düsseldorf.</span></h1>
-                    <p class="hero-lead">Ein Kontrolltagebuch für unsere Stadt:
-                        Erlebte Fahrkartenkontrollen mit Ort, Zeitpunkt und
-                        Linie dokumentieren.</p>
-                    <p class="project-status">Projekt im Aufbau</p>
+                    <p class="eyebrow">Deine Stadt. Deine Haltestellen.</p>
+                    <h1 id="page-title">Düsseldorf. <span>Auf einen Blick.</span></h1>
+                    <p>Eine Haltestelle suchen oder die Karte erkunden. Dein nächster Blick beginnt hier.</p>
                 </div>
-                <figure class="hero-visual">
-                    <img src="public/assets/images/linienblick-icon.png"
-                        alt="LinienBlick-Symbol: rote Bahn, schwarzer Rheinturm und blaue Rheinlinie mit Haltestellenpunkt."
-                        width="1254" height="1254" fetchpriority="high">
-                    <figcaption>Unsere Stadt. Unsere Linien. Ein eigener
-                        Blick.</figcaption>
-                </figure>
+                <div class="intro-note"><span class="status-dot" aria-hidden="true"></span>Ohne Anmeldung nutzbar</div>
             </section>
-            <section id="konzept" class="concept"
-                aria-labelledby="concept-title">
-                <p class="eyebrow">Die Idee</p>
-                <h2 id="concept-title" class="section-title">Drei Angaben. Ein
-                    nachvollziehbarer Eintrag.</h2>
-                <div class="detail-grid">
-                    <article class="detail"><span class="detail-number"
-                            aria-hidden="true">01</span><h3>Der Ort.</h3><p>An
-                            welcher Haltestelle oder auf welchem
-                            Streckenabschnitt hast du die Kontrolle
-                            erlebt?</p></article>
-                    <article class="detail"><span class="detail-number"
-                            aria-hidden="true">02</span><h3>Der
-                            Zeitpunkt.</h3><p>Datum und Uhrzeit ordnen deine
-                            Beobachtung ein und machen den Eintrag
-                            nachvollziehbar.</p></article>
-                    <article class="detail"><span class="detail-number"
-                            aria-hidden="true">03</span><h3>Die
-                            Linie.</h3><p>Die passende Bahn- oder Buslinie
-                            verbindet deine Beobachtung mit dem Düsseldorfer
-                            Liniennetz.</p></article>
+
+            <section id="karte" class="map-workspace" aria-label="Karte und Haltestellensuche">
+                <aside class="stop-panel" aria-labelledby="search-title">
+                    <div class="panel-heading"><span class="eyebrow">Orientierung</span><h2 id="search-title">Wohin geht’s?</h2></div>
+                    <form id="stop-search" role="search" aria-label="Haltestelle suchen">
+                        <label for="search-input">Haltestelle suchen</label>
+                        <div class="search-field">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 5 5"></path></svg>
+                            <input id="search-input" name="q" type="search" placeholder="z. B. Heinrich-Heine-Allee" autocomplete="off" aria-controls="stop-results" aria-describedby="search-hint" disabled>
+                        </div>
+                        <p id="search-hint" class="field-hint">Name eingeben und einen Treffer auswählen.</p>
+                        <label class="scope-toggle"><input id="viewport-only" type="checkbox" disabled><span>Nur im Kartenausschnitt</span></label>
+                    </form>
+                    <div class="results-heading"><h3 id="results-title">Haltestellen</h3><span id="result-count" aria-live="polite" aria-atomic="true">Lädt …</span></div>
+                    <p id="results-message" class="panel-message" role="status">Haltestellen werden geladen.</p>
+                    <button id="retry-stops" class="text-button" type="button" hidden>Haltestellen erneut laden</button>
+                    <ul id="stop-results" class="stop-results" aria-labelledby="results-title" aria-busy="true"></ul>
+                    <section id="selected-stop" class="selected-stop" aria-labelledby="selected-name" hidden>
+                        <div class="selection-heading"><p class="eyebrow">Ausgewählte Haltestelle</p><button id="clear-selection" class="icon-button" type="button" aria-label="Haltestellenauswahl aufheben">×</button></div>
+                        <h3 id="selected-name"></h3>
+                        <p id="selected-description"></p>
+                        <a id="osm-stop-link" target="_blank" rel="noopener noreferrer">In OpenStreetMap ansehen <span aria-hidden="true">↗</span></a>
+                    </section>
+                    <div class="data-note"><span class="data-label">Haltestellendaten: VRR</span><span id="feed-version">GTFS-Datenstand wird geladen.</span></div>
+                </aside>
+
+                <div class="map-area">
+                    <div class="map-toolbar" role="group" aria-label="Kartenansicht steuern">
+                        <span class="map-place"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12Z"></path><circle cx="12" cy="9" r="2"></circle></svg>Düsseldorf</span>
+                        <button id="reset-map" class="toolbar-button" type="button">Stadtübersicht</button>
+                        <button id="locate-me" class="toolbar-button location-button" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"></circle><path d="M12 2v4m0 12v4M2 12h4m12 0h4"></path></svg><span>Mein Standort</span></button>
+                    </div>
+                    <div id="map" aria-label="Interaktive Karte von Düsseldorf. Mit den Pfeiltasten verschieben, mit Plus und Minus zoomen." aria-describedby="map-help"></div>
+                    <div id="tile-warning" class="map-warning" role="status" hidden><span>Kartenhintergrund konnte nicht vollständig geladen werden.</span><button id="retry-tiles" type="button">Erneut laden</button></div>
+                    <div class="map-caption"><span><span class="legend-dot" aria-hidden="true"></span>Haltestelle<span class="legend-dot selected" aria-hidden="true"></span>Ausgewählt</span><span id="map-stop-count">Haltestellen werden geladen.</span></div>
+                    <p id="map-help" class="map-help">Ziehen zum Verschieben, + / − zum Zoomen. Haltestellen kannst du auch über die Liste auswählen.</p>
+                    <p id="map-status" class="map-status" role="status" aria-live="polite" aria-atomic="true">Karte wird gestartet.</p>
+                    <noscript><p class="map-warning">Für Karte und Haltestellensuche muss JavaScript aktiviert sein.</p></noscript>
                 </div>
             </section>
-            <section id="projektstand" class="project-note"
-                aria-labelledby="project-title">
-                <h2 id="project-title">Hier entsteht LinienBlick.</h2>
-                <p>Die Gestaltung und das technische Grundgerüst stehen. Karte,
-                    Einträge und Statistiken sind als nächste Schritte geplant
-                    und auf dieser Seite noch nicht verfügbar.</p>
-            </section>
+            <details id="projektinfo" class="project-info">
+                <summary>Was ist LinienBlick?</summary>
+                <div><h2>Ein unabhängiger Blick auf unsere Stadt.</h2><p>LinienBlick wird ein Kontrolltagebuch für Düsseldorf. Der erste Schritt ist diese Karte: Haltestellen finden, auswählen und die Umgebung erkunden.</p><p>Kontrollberichte, Linienverläufe, Fahrpläne und Statistiken folgen später. Die Haltestellenpunkte zeigen Orte, keine aktuellen Kontrollen.</p><p>Der Standort wird nur auf deinen Klick im Browser verwendet und nicht an einen eigenen Server gesendet. Der Kartenhintergrund kommt von OpenStreetMap; dabei erhält der Anbieter unter anderem deine IP-Adresse und die angefragten Kartenausschnitte.</p></div>
+            </details>
         </main>
         <footer class="site-footer">
-            <div class="container footer-inner">
-                <strong>Ein unabhängiges privates Projekt für
-                    Düsseldorf.</strong>
-                <p>LinienBlick ist kein Angebot der Landeshauptstadt Düsseldorf,
-                    der Rheinbahn oder des VRR und steht mit diesen nicht in
-                    Verbindung.</p>
-            </div>
+            <div class="container footer-inner"><strong>Ein unabhängiges privates Projekt für Düsseldorf.</strong><p>LinienBlick ist kein Angebot der Landeshauptstadt Düsseldorf, der Rheinbahn oder des VRR und steht mit diesen nicht in Verbindung.</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Kartenfehler bei OpenStreetMap melden ↗</a></div>
         </footer>
+        <script type="module" src="/src/scripts/app.js"></script>
     </body>
-
 </html>

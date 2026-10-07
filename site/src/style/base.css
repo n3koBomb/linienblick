@@ -18,7 +18,7 @@
   --color-info-background: #eef8fc;
   --color-info-text: #005477;
   --color-divider: var(--brand-gray);
-  --content-width: 72rem;
+  --content-width: 86rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   font-synthesis: none;
@@ -50,7 +50,7 @@ a:hover { text-decoration-thickness: .15em; }
 :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 5px; }
 ::selection { background: var(--brand-blue); color: var(--brand-black); }
 .container { width: min(100% - 3rem, var(--content-width)); margin-inline: auto; }
-.skip-link { position: absolute; inset: 1rem auto auto 1rem; z-index: 5; padding: .75rem 1rem; background: var(--color-background); transform: translateY(-200%); }
+.skip-link { position: absolute; inset: 1rem auto auto 1rem; z-index: 2000; padding: .75rem 1rem; background: var(--color-background); transform: translateY(-200%); }
 .skip-link:focus { transform: translateY(0); }
 .eyebrow { margin: 0 0 1rem; color: var(--color-muted); font-size: .8rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
 h1, h2, h3 { margin-top: 0; line-height: 1.12; letter-spacing: -.035em; }
