@@ -10,7 +10,7 @@
         <!-- 02 | Seitentitel und Beschreibung pro Seite individuell pflegen. -->
         <title>LinienBlick – Karte und Haltestellen für Düsseldorf</title>
         <meta name="description"
-            content="Entdecke Düsseldorfs Haltestellen auf einer interaktiven Karte. Suche eine Haltestelle, erkunde deine Umgebung und finde dich im Stadtgebiet zurecht." />
+            content="LinienBlick zeigt Düsseldorfs Haltestellen und Linien. Ein unabhängiges Projekt zur sachlichen Dokumentation von Fahrkartenkontrollen." />
         <meta name="application-name" content="LinienBlick" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -125,70 +125,110 @@
                     <img src="/public/favicon/icon-192.png" alt="" width="192" height="192">
                     <span><span class="brand-name">LinienBlick</span><span class="brand-place">Düsseldorf entdecken</span></span>
                 </a>
-                <nav class="site-nav" aria-label="Hauptnavigation">
-                    <a href="#karte" aria-current="page">Karte</a>
-                    <a href="#projektinfo">Über LinienBlick</a>
-                </nav>
-                <span class="build-badge">Erster Ausbauschritt</span>
+            <nav class="site-nav" aria-label="Hauptnavigation">
+                <a href="#karte" aria-current="page">Karte</a>
+                <a href="#projektinfo">Über LinienBlick</a>
+            </nav>
+            <span class="build-badge">Unabhängiges Projekt</span>
             </div>
         </header>
-        <main id="main-content" class="container" tabindex="-1">
-            <section class="map-intro" aria-labelledby="page-title">
-                <div>
-                    <p class="eyebrow">Deine Stadt. Deine Haltestellen.</p>
-                    <h1 id="page-title">Düsseldorf. <span>Auf einen Blick.</span></h1>
-                    <p>Eine Haltestelle suchen oder die Karte erkunden. Dein nächster Blick beginnt hier.</p>
-                </div>
-                <div class="intro-note"><span class="status-dot" aria-hidden="true"></span>Ohne Anmeldung nutzbar</div>
-            </section>
-
-            <section id="karte" class="map-workspace" aria-label="Karte und Haltestellensuche">
-                <aside class="stop-panel" aria-labelledby="search-title">
-                    <div class="panel-heading"><span class="eyebrow">Orientierung</span><h2 id="search-title">Wohin geht’s?</h2></div>
-                    <form id="stop-search" role="search" aria-label="Haltestelle suchen">
-                        <label for="search-input">Haltestelle suchen</label>
-                        <div class="search-field">
-                            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 5 5"></path></svg>
-                            <input id="search-input" name="q" type="search" placeholder="z. B. Heinrich-Heine-Allee" autocomplete="off" aria-controls="stop-results" aria-describedby="search-hint" disabled>
-                        </div>
-                        <p id="search-hint" class="field-hint">Name eingeben und einen Treffer auswählen.</p>
-                        <label class="scope-toggle"><input id="viewport-only" type="checkbox" disabled><span>Nur im Kartenausschnitt</span></label>
-                    </form>
-                    <div class="results-heading"><h3 id="results-title">Haltestellen</h3><span id="result-count" aria-live="polite" aria-atomic="true">Lädt …</span></div>
-                    <p id="results-message" class="panel-message" role="status">Haltestellen werden geladen.</p>
+        <main id="main-content" tabindex="-1">
+            <section id="karte" class="map-view" aria-label="Karte von Düsseldorf">
+                <h1 class="visually-hidden">LinienBlick Karte</h1>
+                <div id="map" aria-label="Interaktive Karte von Düsseldorf. Mit den Pfeiltasten verschieben, mit Plus und Minus zoomen." aria-describedby="map-help"></div>
+                <form id="stop-search" class="floating-search" role="search" aria-label="Haltestelle suchen">
+                    <label class="visually-hidden" for="search-input">Haltestelle suchen</label>
+                    <div class="search-field">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 5 5"></path></svg>
+                        <input id="search-input" name="q" type="search" placeholder="Haltestelle suchen …" autocomplete="off" aria-controls="stop-results" aria-describedby="search-hint" disabled>
+                        <button id="clear-search" class="search-clear" type="button" aria-label="Suche löschen" hidden>×</button>
+                    </div>
+                    <p id="search-hint" class="visually-hidden">Name eingeben und einen Treffer auswählen.</p>
+                    <label class="scope-toggle"><input id="viewport-only" type="checkbox" disabled><span>Nur im Kartenausschnitt</span></label>
+                </form>
+                <section id="search-results" class="search-results" aria-labelledby="results-title" hidden>
+                    <div class="results-heading"><h2 id="results-title">Haltestellen</h2><span id="result-count" aria-live="polite" aria-atomic="true"></span></div>
+                    <p id="results-message" class="panel-message" role="status" hidden></p>
                     <button id="retry-stops" class="text-button" type="button" hidden>Haltestellen erneut laden</button>
                     <ul id="stop-results" class="stop-results" aria-labelledby="results-title" aria-busy="true"></ul>
-                    <section id="selected-stop" class="selected-stop" aria-labelledby="selected-name" hidden>
-                        <div class="selection-heading"><p class="eyebrow">Ausgewählte Haltestelle</p><button id="clear-selection" class="icon-button" type="button" aria-label="Haltestellenauswahl aufheben">×</button></div>
-                        <h3 id="selected-name"></h3>
-                        <p id="selected-description"></p>
-                        <a id="osm-stop-link" target="_blank" rel="noopener noreferrer">In OpenStreetMap ansehen <span aria-hidden="true">↗</span></a>
+                </section>
+                <aside id="selected-stop" class="selected-stop floating-sidebar" aria-labelledby="selected-name" hidden>
+                    <div class="selection-heading"><p class="eyebrow">Haltestelle</p><button id="clear-selection" class="icon-button" type="button" aria-label="Haltestellenauswahl aufheben">×</button></div>
+                    <h2 id="selected-name"></h2>
+                    <p id="selected-description"></p>
+                    <a id="osm-stop-link" target="_blank" rel="noopener noreferrer">In OpenStreetMap ansehen <span aria-hidden="true">↗</span></a>
+                    <section class="line-finder" aria-labelledby="line-title">
+                        <div class="results-heading"><h3 id="line-title">Linienverlauf</h3><span id="line-count" aria-live="polite">Lädt …</span></div>
+                        <label for="line-select">Linie und Betreiber</label>
+                        <select id="line-select" disabled><option value="">Linien werden geladen …</option></select>
+                        <label for="pattern-select">Fahrtverlauf</label>
+                        <select id="pattern-select" disabled><option value="">Erst Linie auswählen</option></select>
+                        <p id="line-help" class="field-hint">Wähle eine Linie, um ihren schematischen Verlauf zu sehen.</p>
                     </section>
-                    <div class="data-note"><span class="data-label">Haltestellendaten: VRR</span><span id="feed-version">GTFS-Datenstand wird geladen.</span></div>
+                    <div class="data-note"><span class="data-label">Fahrplandaten: VRR AöR · CC BY</span><span id="feed-version">GTFS-Datenstand wird geladen.</span></div>
                 </aside>
-
-                <div class="map-area">
-                    <div class="map-toolbar" role="group" aria-label="Kartenansicht steuern">
-                        <span class="map-place"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12Z"></path><circle cx="12" cy="9" r="2"></circle></svg>Düsseldorf</span>
-                        <button id="reset-map" class="toolbar-button" type="button">Stadtübersicht</button>
-                        <button id="locate-me" class="toolbar-button location-button" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"></circle><path d="M12 2v4m0 12v4M2 12h4m12 0h4"></path></svg><span>Mein Standort</span></button>
+                <div class="map-toolbar floating-card" role="status" aria-label="Live-Status und Besucherzahl kommen später">
+                    <div class="live-badge">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 9a10 10 0 0 1 14 0M8 12a6 6 0 0 1 8 0m-5 3a2 2 0 0 1 2 0"></path><circle cx="12" cy="18" r="1"></circle></svg>
+                        <strong>Live</strong><span>kommt bald</span>
                     </div>
-                    <div id="map" aria-label="Interaktive Karte von Düsseldorf. Mit den Pfeiltasten verschieben, mit Plus und Minus zoomen." aria-describedby="map-help"></div>
-                    <div id="tile-warning" class="map-warning" role="status" hidden><span>Kartenhintergrund konnte nicht vollständig geladen werden.</span><button id="retry-tiles" type="button">Erneut laden</button></div>
-                    <div class="map-caption"><span><span class="legend-dot" aria-hidden="true"></span>Haltestelle<span class="legend-dot selected" aria-hidden="true"></span>Ausgewählt</span><span id="map-stop-count">Haltestellen werden geladen.</span></div>
-                    <p id="map-help" class="map-help">Ziehen zum Verschieben, + / − zum Zoomen. Haltestellen kannst du auch über die Liste auswählen.</p>
-                    <p id="map-status" class="map-status" role="status" aria-live="polite" aria-atomic="true">Karte wird gestartet.</p>
-                    <noscript><p class="map-warning">Für Karte und Haltestellensuche muss JavaScript aktiviert sein.</p></noscript>
+                </div>
+                <div id="tile-warning" class="map-warning floating-card" role="status" hidden><span>Kartenhintergrund konnte nicht vollständig geladen werden.</span><button id="retry-tiles" type="button">Erneut laden</button></div>
+                <div class="map-caption floating-card"><span><span class="legend-dot" aria-hidden="true"></span>Haltestelle<span class="legend-dot selected" aria-hidden="true"></span>Ausgewählt<span class="legend-line" aria-hidden="true"></span>Linie</span><span id="map-stop-count">Haltestellen werden geladen.</span></div>
+                <p id="map-help" class="visually-hidden">Ziehen zum Verschieben, mit Plus und Minus zoomen. Haltestellen kannst du über die Suche oder direkt auf der Karte auswählen.</p>
+                <p id="map-status" class="map-status floating-card" role="status" aria-live="polite" aria-atomic="true">Karte wird gestartet.</p>
+                <noscript><p class="map-warning floating-card">Für Karte und Haltestellensuche muss JavaScript aktiviert sein.</p></noscript>
+            </section>
+            <section id="projektinfo" class="about-view" aria-labelledby="about-title" hidden>
+                <div class="about-shell">
+                    <p class="eyebrow">LinienBlick · Düsseldorf</p>
+                    <h1 id="about-title">Ein klarer Blick auf den Nahverkehr.</h1>
+                    <p class="about-lead">LinienBlick ist ein unabhängiges privates Projekt. Es soll Orientierung im Düsseldorfer Nahverkehr geben und später ermöglichen, eigene Beobachtungen zu Fahrkartenkontrollen sachlich zu dokumentieren.</p>
+                    <div class="about-grid">
+                        <article class="about-card about-idea">
+                            <p class="eyebrow">Die Idee</p>
+                            <h2>Erfahrungen sichtbar und nachvollziehbar machen.</h2>
+                            <p>Beobachtungen zu Fahrkartenkontrollen werden oft nur einzeln weitererzählt. Die Idee hinter LinienBlick ist, solche Erlebnisse mit Ort, Zeit und Verbindung geordnet festzuhalten und gemeinsam ein besseres Bild davon zu bekommen.</p>
+                            <p>Die Karte ist der erste Schritt: Haltestellen finden, Linien erkunden und den Zusammenhang zwischen Ort und Fahrt verstehen. Spätere Berichte sollen von Nutzenden stammen und dürfen nicht mit einer vollständigen oder amtlich bestätigten Erfassung verwechselt werden.</p>
+                        </article>
+                        <article class="about-card">
+                            <p class="eyebrow">Stand heute</p>
+                            <h2>Orientierung statt Live-Meldungen.</h2>
+                            <p>Der aktuelle Prototyp zeigt Haltestellen und statische Linienmuster aus Fahrplandaten. Die Linien sind schematisch. Es gibt hier noch keine Live-Fahrzeugpositionen, aktuellen Kontrollen oder veröffentlichten Nutzerberichte.</p>
+                        </article>
+                        <article class="about-card">
+                            <p class="eyebrow">Unabhängigkeit</p>
+                            <h2>Kein offizielles Angebot.</h2>
+                            <p>LinienBlick ist kein Angebot der Landeshauptstadt Düsseldorf, der Rheinbahn oder des Verkehrsverbunds Rhein-Ruhr und steht mit ihnen nicht in Verbindung. Es werden keine Namen, Fotos oder Personenbeschreibungen von Mitarbeitenden für Berichte vorgesehen.</p>
+                        </article>
+                        <article class="about-card">
+                            <p class="eyebrow">Rechtlicher Rahmen</p>
+                            <h2>Dokumentieren mit Verantwortung.</h2>
+                            <p>Die Meinungsfreiheit schützt grundsätzlich, eigene Ansichten und Erfahrungen zu äußern. Sie ist aber kein Freibrief: allgemeine Gesetze und das Recht der persönlichen Ehre setzen Grenzen. Deshalb sollen Berichte sachlich bleiben, keine Mitarbeitenden identifizieren und als nicht unabhängig verifizierte Nutzermeldungen erkennbar sein.</p>
+                            <p>Diese Hinweise sind keine Rechtsberatung und keine pauschale Freigabe jeder Veröffentlichung. Datenschutz, Persönlichkeitsrechte, Moderation und Löschung müssen vor einem öffentlichen Meldebetrieb konkret geregelt werden.</p>
+                            <a href="https://www.gesetze-im-internet.de/gg/art_5.html" target="_blank" rel="noopener noreferrer">Grundgesetz, Artikel 5 ↗</a>
+                        </article>
+                        <article class="about-card">
+                            <p class="eyebrow">Daten und Lizenzen</p>
+                            <h2>Offene Quellen, sichtbar genannt.</h2>
+                            <p>Die Fahrplandaten stammen aus dem Open-Data-Angebot des VRR und werden mit Namensnennung (CC BY) genutzt. Die Linien verbinden Haltestellen schematisch, weil der verwendete Feed keine Streckengeometrien enthält.</p>
+                            <p>Die Kartendaten stammen von OpenStreetMap-Mitwirkenden und stehen unter der ODbL. Die Kartenkacheln kommen von OpenStreetMap Deutschland / FOSSGIS; für den Kacheldienst gelten eigene Nutzungsbedingungen.</p>
+                            <ul class="source-links">
+                                <li><a href="https://www.opendata-oepnv.de/ht/de/organisation/verkehrsverbuende/vrr/openvrr/datensaetze?tx_vrrkit_view%5Baction%5D=details&amp;tx_vrrkit_view%5Bcontroller%5D=View&amp;tx_vrrkit_view%5Bdataset_name%5D=soll-fahrplandaten-vrr" target="_blank" rel="noopener noreferrer">VRR Soll-Fahrplandaten und Lizenz ↗</a></li>
+                                <li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap: Copyright und ODbL ↗</a></li>
+                                <li><a href="https://openstreetmap.de/germanstyle/" target="_blank" rel="noopener noreferrer">Kartenstil und Kacheln ↗</a></li>
+                            </ul>
+                        </article>
+                        <article class="about-card">
+                            <p class="eyebrow">Datenschutz</p>
+                            <h2>Standort nur nach deiner Aktion.</h2>
+                            <p>Der Standort wird nur verwendet, wenn du „Mein Standort“ auswählst, und nicht an einen eigenen LinienBlick-Server gesendet. Beim Laden der Kartenkacheln werden technische Anfragen an den Kacheldienst gestellt; dabei können IP-Adresse und angezeigter Kartenausschnitt übermittelt werden.</p>
+                        </article>
+                    </div>
+                    <footer class="about-footer"><strong>Ein unabhängiges privates Projekt für Düsseldorf.</strong><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Kartenfehler bei OpenStreetMap melden ↗</a></footer>
                 </div>
             </section>
-            <details id="projektinfo" class="project-info">
-                <summary>Was ist LinienBlick?</summary>
-                <div><h2>Ein unabhängiger Blick auf unsere Stadt.</h2><p>LinienBlick wird ein Kontrolltagebuch für Düsseldorf. Der erste Schritt ist diese Karte: Haltestellen finden, auswählen und die Umgebung erkunden.</p><p>Kontrollberichte, Linienverläufe, Fahrpläne und Statistiken folgen später. Die Haltestellenpunkte zeigen Orte, keine aktuellen Kontrollen.</p><p>Der Standort wird nur auf deinen Klick im Browser verwendet und nicht an einen eigenen Server gesendet. Die Karte nutzt OpenStreetMap-Daten; die Kacheln liefert OpenStreetMap Deutschland über FOSSGIS. Der Kacheldienst erhält unter anderem deine IP-Adresse und die angefragten Kartenausschnitte.</p></div>
-            </details>
         </main>
-        <footer class="site-footer">
-            <div class="container footer-inner"><strong>Ein unabhängiges privates Projekt für Düsseldorf.</strong><p>LinienBlick ist kein Angebot der Landeshauptstadt Düsseldorf, der Rheinbahn oder des VRR und steht mit diesen nicht in Verbindung.</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Kartenfehler bei OpenStreetMap melden ↗</a></div>
-        </footer>
         <script src="/src/config/map-config.js"></script>
         <script type="module" src="/src/scripts/app.js"></script>
     </body>

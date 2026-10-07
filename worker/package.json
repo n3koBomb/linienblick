@@ -9,7 +9,8 @@
     "deploy": "wrangler deploy",
     "test": "vitest --pool=threads",
     "test:workers": "vitest --config vitest.workers.config.js",
-    "test:all": "npm run test && npm run test:workers"
+    "test:all": "npm run test && npm run test:workers",
+    "import:lines": "python3 ../scripts/import_lines.py --stop-times ../temp/stop_times.txt --trips ../temp/trips.txt --routes ../temp/routes.txt --agencies ../temp/agency.txt --stops ../site/public/data/stops-duesseldorf.json --output ../site/public/data/lines-duesseldorf.json"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.12.4",

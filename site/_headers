@@ -1,7 +1,8 @@
 # LinienBlick | First Step: Beispiel fuer Cloudflare Pages, statische Dateien.
 # Diese Datei liegt ohne Dateiendung im Build-Ausgabeordner neben index.html.
 # Ein normaler Node-/Express-Server oder python http.server liest sie nicht.
-# Pages Functions / Worker-Antworten setzen diese Header selbst im Code.
+# Worker-generierte Antworten setzen eigene Header im Code. Statische Assets
+# werden von Wrangler ausgeliefert und erhalten die Regeln aus dieser Datei.
 
 /*
   X-Content-Type-Options: nosniff

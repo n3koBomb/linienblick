@@ -1,47 +1,47 @@
-/* App-Hülle: eigene Marke, ruhige Oberfläche, Karte als Hauptinhalt. */
-.site-header { border-bottom: 1px solid var(--color-border); }
-.header-inner { min-height: 5.5rem; display: flex; align-items: center; gap: 2rem; }
-.brand { display: inline-flex; align-items: center; gap: .75rem; color: var(--color-text); text-decoration: none; flex-shrink: 0; }
-.brand img { width: 2.9rem; height: 2.9rem; border: 1px solid #dedede; border-radius: .65rem; background: #fff; }
-.brand-name { display: block; font-size: 1.35rem; font-weight: 850; letter-spacing: -.045em; line-height: 1.15; }
-.brand-place { display: block; margin-top: .2rem; color: var(--color-muted); font-size: .75rem; }
-.site-nav { display: flex; align-items: center; gap: 1.75rem; margin-left: auto; }
-.site-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-muted); font-size: .9rem; font-weight: 650; text-decoration: none; }
-.site-nav a[aria-current] { color: var(--color-accent); }
-.site-nav a:hover { color: var(--color-accent); text-decoration: underline; }
-.build-badge { padding: .35rem .65rem; border: 1px solid var(--color-border); border-radius: .3rem; color: var(--color-muted); font-size: .7rem; white-space: nowrap; }
-.map-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-block: 2.25rem 1.75rem; }
-.map-intro .eyebrow { margin-bottom: .65rem; font-size: .7rem; }
-.map-intro h1 { margin-bottom: .65rem; font-size: clamp(1.8rem, 3.2vw, 2.8rem); color: var(--color-heading); }
-.map-intro h1 span { color: var(--color-text); }
-.map-intro p:last-child { margin-bottom: 0; color: var(--color-muted); font-size: .95rem; }
-.intro-note { display: flex; gap: .5rem; align-items: center; color: var(--color-muted); font-size: .75rem; white-space: nowrap; margin-bottom: .1rem; }
-.status-dot { width: .45rem; height: .45rem; border-radius: 50%; background: var(--color-accent); }
-.project-info { border-block: 1px solid var(--color-border); margin-block: 1.5rem 2rem; }
-.project-info summary { display: flex; align-items: center; justify-content: space-between; min-height: 3.75rem; cursor: pointer; font-size: .9rem; font-weight: 650; }
-.project-info summary::after { content: '+'; font-size: 1.5rem; }
-.project-info[open] summary::after { content: '−'; }
-.project-info > div { padding: .5rem 0 1.5rem; max-width: 75ch; color: var(--color-muted); font-size: .9rem; }
-.project-info h2 { color: var(--color-text); font-size: 1.2rem; }
-.site-footer { border-top: 1px solid var(--color-border); }
-.footer-inner { padding-block: 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: .4rem 2rem; }
-.footer-inner strong { display: block; font-size: .8rem; }
-.footer-inner p { grid-column: 1; max-width: 85ch; margin-bottom: 0; color: var(--color-muted); font-size: .75rem; }
-.footer-inner > a { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: .75rem; padding-block: .75rem; }
+/* App shell and page switch. */
+.site-header { position: fixed; inset: 0 0 auto; z-index: 1200; border-bottom: 1px solid var(--color-border); background: color-mix(in srgb, var(--color-background) 90%, transparent); backdrop-filter: blur(16px); }
+.header-inner { min-height: 4.25rem; display: flex; align-items: center; gap: 1.5rem; }
+.brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--color-text); text-decoration: none; flex: none; }
+.brand img { width: 2.35rem; height: 2.35rem; border: 1px solid #dedede; border-radius: .55rem; background: #fff; }
+.brand-name { display: block; font-size: 1.15rem; font-weight: 850; letter-spacing: -.045em; line-height: 1.15; }
+.brand-place { display: block; margin-top: .15rem; color: var(--color-muted); font-size: .68rem; }
+.site-nav { display: flex; align-items: center; gap: .4rem; margin-left: auto; }
+.site-nav a { display: inline-flex; align-items: center; min-height: 2.65rem; padding: .4rem .8rem; border: 1px solid transparent; border-radius: .45rem; color: var(--color-muted); font-size: .82rem; font-weight: 700; text-decoration: none; }
+.site-nav a[aria-current="page"] { border-color: var(--color-border); background: var(--color-background); color: var(--color-accent); box-shadow: 0 2px 10px #00000012; }
+.site-nav a:hover { color: var(--color-accent); }
+.build-badge { padding: .3rem .55rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-muted); font-size: .64rem; white-space: nowrap; }
+body[data-view="map"] { height: 100dvh; overflow: hidden; }
+.about-view { min-height: 100dvh; padding: 6.5rem 1.5rem 2rem; overflow-y: auto; background: var(--color-background); }
+.about-shell { width: min(100%, 68rem); margin-inline: auto; }
+.about-shell > .eyebrow { margin-bottom: .7rem; font-size: .68rem; }
+.about-shell h1 { max-width: 16ch; margin-bottom: 1rem; color: var(--color-heading); font-size: clamp(2.2rem, 5vw, 4.5rem); }
+.about-lead { max-width: 66ch; margin-bottom: 2.2rem; color: var(--color-muted); font-size: clamp(1rem, 1.7vw, 1.25rem); line-height: 1.65; }
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.about-card { padding: clamp(1.1rem, 2.5vw, 1.75rem); border: 1px solid var(--color-border); border-radius: .85rem; background: var(--color-surface); }
+.about-card .eyebrow { margin-bottom: .55rem; font-size: .62rem; }
+.about-card h2 { margin-bottom: .8rem; font-size: clamp(1.15rem, 2vw, 1.5rem); }
+.about-card p, .about-card li { color: var(--color-muted); font-size: .85rem; line-height: 1.7; }
+.about-card p:last-child { margin-bottom: 0; }
+.about-card a { font-size: .82rem; }
+.about-idea { grid-row: span 2; }
+.source-links { display: grid; gap: .55rem; margin: .9rem 0 0; padding-left: 1.2rem; }
+.about-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: .76rem; }
+.about-footer a { font-size: inherit; }
 @media (max-width: 48rem) {
-  .build-badge { display: none; }
-  .header-inner { gap: 1rem; }
-  .map-intro { display: block; padding-block: 1.5rem; }
-  .intro-note { margin-top: .75rem; }
-  .footer-inner { display: block; }
-  .footer-inner > * { margin-bottom: .6rem; }
-  .footer-inner > a { display: inline-block; }
+  .header-inner { gap: .65rem; min-height: 3.9rem; }
+  .brand { gap: .45rem; }
+  .brand img { width: 2rem; height: 2rem; }
+  .brand-name { font-size: 1rem; }
+  .brand-place, .build-badge { display: none; }
+  .site-nav { gap: .1rem; }
+  .site-nav a { min-height: 2.4rem; padding-inline: .55rem; font-size: .72rem; }
+  .about-view { padding: 5.4rem 1rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: .7rem; }
+  .about-idea { grid-row: auto; }
+  .about-lead { margin-bottom: 1.4rem; }
+  .about-footer { align-items: flex-start; flex-direction: column; }
 }
-@media (max-width: 34rem) {
-  .brand-place { display: none; }
-  .brand-name { font-size: 1.15rem; }
-  .brand img { width: 2.4rem; height: 2.4rem; }
-  .site-nav { gap: .75rem; }
-  .site-nav a { font-size: .75rem; }
-  .header-inner { min-height: 4.5rem; }
+@media (max-width: 22rem) {
+  .brand-name { display: none; }
+  .site-nav a { padding-inline: .4rem; }
 }

@@ -29,7 +29,7 @@ Es sollen Ereignisse dokumentiert werden, ohne einzelne Kontrolleure zu identifi
 | Karte, Meldungen und Statistiken öffentlich sichtbar | Beschlossen |
 | Meldungen regulär sofort veröffentlichen | Beschlossen |
 | Technisch bedingte Verzögerungen bei Überlastung oder Verbindungsproblemen | Beschlossen |
-| Bahnlinien mit tatsächlichem Verlauf und Haltestellen anzeigen | Beschlossen; passende Streckengeometrien fehlen noch |
+| Linien mit Haltestellenfolge auf der Karte anzeigen | Beschlossen; schematische GTFS-Verläufe sind umgesetzt, genaue Streckengeometrien fehlen noch |
 | Rote Meldungspunkte an zugeordneten Haltestellen | Beschlossen |
 | Einzelne Berichte unterscheidbar halten | Beschlossen |
 | Öffentliche Anzeige der gerade aktiven Besucher | Beschlossen; genaue Zählregeln sind vorgeschlagen |
@@ -42,7 +42,7 @@ Eine absichtliche Veröffentlichung erst am Folgetag wurde zunächst vorgeschlag
 
 ## 3. Bereits erledigte Arbeit
 
-Die Projektidee und der grundlegende Bedienablauf wurden gemeinsam ausgearbeitet. Außerdem wurden neun hochgeladene GTFS-Dateien vollständig eingelesen und auf zentrale Verknüpfungen geprüft.
+Die Projektidee und der grundlegende Bedienablauf wurden gemeinsam ausgearbeitet. Außerdem wurden zehn lokale GTFS-Dateien vollständig eingelesen und auf zentrale Verknüpfungen geprüft.
 
 Dabei wurden insbesondere ermittelt:
 
@@ -54,7 +54,7 @@ Dabei wurden insbesondere ermittelt:
 - Verweise zwischen Unternehmen, Linien, Fahrten, Stationen und Umsteigebeziehungen.
 - Fehlende Streckengeometrien im hochgeladenen Datenbestand.
 
-Diese Prüfung ist eine Analyse des Datenbestands. Eine fertige öffentliche App, produktive Speicherung, Nutzerverwaltung oder vollständige Linienkarte wurde in diesem Gespräch noch nicht umgesetzt oder nachgewiesen.
+Die Datenanalyse ist umgesetzt. Der Kartenprototyp zeigt Haltestellen sowie auswählbare, schematische Linienverläufe aus der GTFS-Haltestellenfolge. Die Karte füllt den Bildschirm; Suche, Treffer und Haltestelleninformationen liegen als schwebende Elemente darüber. Karte und Projektinformationen sind getrennte Ansichten. Eine produktive Speicherung, Nutzerverwaltung oder geografisch genaue Streckengeometrie ist damit nicht umgesetzt.
 
 ## 4. Geplante Oberfläche
 
@@ -283,9 +283,10 @@ Alle Zahlen zählen Datenzeilen ohne Kopfzeile.
 | `calendar_dates.txt` | 255.656 | Betrieb an konkreten Tagen |
 | `transfers.txt` | 76.078 | Umsteigebeziehungen |
 | `shapes.txt` | 0 | Keine Streckenpunkte vorhanden |
+| `stop_times.txt` | 5.240.109 | Geordnete Haltestellen und Zeiten je Fahrt |
 | `feed_info.txt` | 1 | Herausgeber, Version und Zeitraum |
 
-Die Datei `stop_times.txt` wurde wegen ihrer Größe von über 500 MB nicht hochgeladen und nicht geprüft.
+Die Rohdateien liegen nur lokal in `temp/` und werden nicht mit der Website veröffentlicht. Das Importskript liest `stop_times.txt` zeilenweise und erzeugt eine kompakte Datei mit den Düsseldorfer Linienmustern.
 
 ### Rheinbahn im Datensatz
 
@@ -318,17 +319,19 @@ Alle Wochenflags in `calendar.txt` stehen auf `0`. Der Betrieb an einzelnen Tage
 
 Bei allen 54.367 Rheinbahn-Fahrten ist `trip_headsign` leer. Außerdem haben 69 der 148 Rheinbahn-Linieneinträge keine Langbezeichnung. Die Richtungskennungen `0` und `1` sind vorhanden, liefern aber allein keine verständlichen Zielnamen.
 
-### Fehlende Geometrien
+### Fehlende Streckengeometrien
 
-Die hochgeladene `shapes.txt` enthält nur die Kopfzeile und ist 74 Byte groß. Bei allen 220.511 Fahrten ist `shape_id` leer. Die tatsächlichen Streckenverläufe sind deshalb in diesen Dateien nicht enthalten.
+Die `shapes.txt` enthält nur die Kopfzeile und ist 74 Byte groß. Bei allen 220.511 Fahrten ist `shape_id` leer. Die tatsächlichen Straßen- und Gleisverläufe sind deshalb in diesen Dateien nicht enthalten.
 
-Aus vorhandenen Haltestellenkoordinaten allein lässt sich noch keine tatsächliche Streckenführung entlang von Straßen und Gleisen ableiten.
+Die Linienansicht verbindet die geordnete Haltestellenfolge mit geraden Abschnitten zwischen den Haltestellenkoordinaten. Sie zeigt die Bedienungsfolge schematisch, nicht den exakten Verlauf entlang von Straßen und Gleisen.
 
 ### Geprüfte Verknüpfungen
 
 Bei der durchgeführten Prüfung wurden keine doppelten Betreiber-, Linien-, Haltestellen- oder Fahrt-IDs gefunden. Es gab keine fehlenden referenzierten Betreiber, Linien, Betriebskennungen, Elternstationen oder Umsteigehaltestellen. Ebenso wurden keine fehlerhaften Spaltenanzahlen in den geprüften CSV-Zeilen festgestellt.
 
-Diese Prüfungen ersetzen keine vollständige Validierung eines kompletten GTFS-Pakets, insbesondere weil `stop_times.txt` fehlt.
+Der Linienimport verarbeitet 5.240.109 Stop-Zeit-Zeilen. Für 137 Linien mit mindestens zwei Düsseldorfer Haltestellen entstehen 870 unterschiedliche Fahrtmuster: 90 Buslinien, 24 Zug- und S-Bahn-Linien, 14 Stadtbahnlinien, acht Straßenbahnlinien und eine weitere Schienenlinie. Die Haltestellenkennungen aus `stop_times.txt` lassen sich über ihre DHID-Präfixe den 630 zusammengefassten Kartenorten zuordnen. Gleich benannte Linien bleiben über ihre GTFS-Linien- und Betreiberkennungen getrennt.
+
+Diese Aufbereitung ist keine vollständige Validierung eines kompletten GTFS-Pakets. Insbesondere enthält der Feed keine Streckenpunkte in `shapes.txt`.
 
 ## 13. Was bereits mit den vorhandenen Daten möglich ist
 
@@ -336,13 +339,14 @@ Diese Prüfungen ersetzen keine vollständige Validierung eines kompletten GTFS-
 | --- | --- |
 | Haltestellenkarte und Haltestellensuche | Mit `stops.txt` möglich |
 | Zusammengefasste Stationen und Bahnsteigauswahl | Mit Stationsbeziehungen und geeigneter Zuordnung möglich |
-| Rheinbahn-Linienauswahl | Mit `agency.txt` und `routes.txt` möglich |
+| Linienauswahl nach Verkehrsmittel und Betreiber | Mit `agency.txt` und `routes.txt` möglich; im Kartenprototyp umgesetzt |
 | Berichte einer gewählten Haltestelle und Linie zuordnen | Möglich; eine automatische Prüfung der Linien-Haltestellen-Beziehung fehlt noch |
 | Rote Meldungspunkte und Meldungsliste | Unabhängig von einer vollständigen Liniengeometrie umsetzbar |
 | Fahrten mit ihren Betriebsdaten verbinden | Mit `trips.txt` und den Kalenderdateien möglich |
-| Geordnete Haltestellenfolge einer bestimmten Fahrt | Erfordert `stop_times.txt` |
+| Geordnete Düsseldorfer Haltestellenfolge einer Linienfahrt | Mit `stop_times.txt`, `trips.txt` und `routes.txt` umgesetzt |
 | Vollständige Ziel- und Fahrtvarianten zuverlässig auswerten | Erfordert weitere Daten beziehungsweise Aufbereitung |
-| Tatsächlichen geografischen Linienverlauf zeichnen | Erfordert zusätzliche Streckengeometrien |
+| Schematische Linie über ihre Haltestellen zeichnen | Mit den geordneten GTFS-Haltestellenfolgen umgesetzt |
+| Exakten Verlauf entlang von Straßen und Gleisen zeichnen | Erfordert zusätzliche Streckengeometrien |
 
 ## 14. Geplante Datenaufbereitung und technische Grundlage
 
@@ -377,11 +381,11 @@ Vorgesehen sind:
 5. Aktualisierungen prüfen, bevor sie den aktiven Datenbestand ersetzen.
 6. Bestehende Berichte auch nach Änderungen an den Verkehrsdaten verständlich erhalten.
 
-### Umgang mit der großen `stop_times.txt`
+### Import der großen `stop_times.txt`
 
-Die Datei muss nicht vollständig hochgeladen werden. Ein lokaler Export kann sie zeilenweise verarbeiten und anhand ausgewählter `trip_id`-Werte filtern. Für den Einstieg reichen die Haltestellenfolgen der relevanten Bahnfahrten; Fahrplaninformationen können später ergänzt werden.
+`scripts/import_lines.py` verarbeitet die große Datei zeilenweise und verbindet Haltestellenfolgen über `trips.txt` mit `routes.txt` und `agency.txt`. Der Aufruf aus dem Worker-Paket lautet `npm run import:lines`. Die Ausgabe `site/public/data/lines-duesseldorf.json` enthält nur die Linienmuster im Düsseldorfer Kartendatensatz; die Rohdateien und die einzelnen Abfahrtszeiten werden nicht ausgeliefert.
 
-Ein solches Exportwerkzeug ist noch zu erstellen. Nach dem Export werden Vollständigkeit und Haltestellenverweise geprüft.
+Die Linienauswahl zeigt Verkehrsmittel, Linie, Betreiber und verfügbare Fahrtmuster. Bei Linien mit mehreren Varianten kann ein einzelner Verlauf ausgewählt werden. `trip_headsign` ist im untersuchten Feed überwiegend leer; die Auswahl nennt deshalb Start- und Endhaltestelle des jeweiligen Düsseldorfer Ausschnitts.
 
 ### Ergänzende Streckengeometrien
 
@@ -405,13 +409,13 @@ Umfang des Prototyps:
 
 - Responsive Kartenansicht für Handy und Computer.
 - Importierte Haltestellen und Suchfunktion.
-- Linienauswahl, zunächst für Stadtbahn und Straßenbahn.
+- Linienauswahl für Bus, Stadtbahn, Straßenbahn und Zug.
 - Meldeformular, Meldungsdetails und Meldungsliste.
 - Rote Punkte und zusammengefasste Meldungen.
 - Erste Zeitraumfilter.
 - Klar gekennzeichnete Beispieldaten für Bedienungsprüfungen.
 
-Die vollständigen Linienverläufe müssen den Einstieg nicht blockieren. Bis sie vorliegen, darf die Oberfläche keinen geografisch vollständigen Verlauf vortäuschen.
+Die Linienverläufe beruhen auf Haltestellenfolgen und sind zwischen den Halten schematisch. Für geografisch genaue Linienführungen werden weiterhin passende Streckengeometrien benötigt.
 
 ### Schritt 2: Öffentliche Speicherung
 
@@ -431,7 +435,7 @@ Die vollständigen Linienverläufe müssen den Einstieg nicht blockieren. Bis si
 - Archiv und zusätzliche Filter.
 - Später eine nachvollziehbare Zuordnung zusammengehöriger Ereignisse.
 
-Parallel werden der gefilterte `stop_times`-Export und die tatsächlichen Liniengeometrien vorbereitet.
+Die tatsächlichen Liniengeometrien aus passenden GTFS-Shapes oder geprüften ÖPNV-Routenrelationen bleiben ein möglicher nächster Ausbauschritt.
 
 ## 16. Kriterien für eine nutzbare erste Version
 
@@ -458,7 +462,7 @@ Diese Punkte sind Abnahmekriterien für die spätere Umsetzung. Sie sind noch ke
 - Exakte Filtervoreinstellungen und Darstellung von Abschnittsmeldungen.
 - Verfahren zur Zuordnung mehrerer Berichte zu einem Ereignis.
 - Backend, Datenbank, Kartenanbieter und Echtzeitübertragung.
-- Gefilterter Import der großen `stop_times.txt`.
+- Updateverfahren für den bereits umgesetzten Import von `stop_times.txt`.
 - Quelle und Zuordnung der tatsächlichen Streckenverläufe.
 - Updateverfahren für Verkehrsdaten und Umgang mit Umleitungen.
 - Konkrete Definition aktiver Sitzungen und Behandlung von Hintergrund-Tabs.

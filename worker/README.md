@@ -6,6 +6,17 @@ Die öffentliche Seitenstruktur folgt MIRoKIT: Inhalte liegen in `site/`, währe
 
 Die Kartenkachelquelle ist in `site/src/config/map-config.js` austauschbar. Der Prototyp verwendet den deutschen Kartenstil von `tile.openstreetmap.de`. Dessen Betreiber erlaubt Website-Einbindungen nur für nichtkommerzielle Zwecke und begrenzt die Kachelrate pro IP; für einen größeren öffentlichen Betrieb ist daher eine eigene oder vertraglich passende Kachelquelle auszuwählen.
 
+## Linien aus GTFS vorbereiten
+
+Für die Linienauswahl benötigt der Import `stop_times.txt`, `trips.txt`, `routes.txt` und `agency.txt` aus derselben GTFS-Version. Die großen Rohdateien bleiben lokal unter `temp/` und werden nicht veröffentlicht. Der Import erzeugt daraus `site/public/data/lines-duesseldorf.json`:
+
+```sh
+cd worker
+npm run import:lines
+```
+
+Der VRR-Feed enthält keine `shapes.txt`-Geometrien. Die erzeugten Verläufe verbinden daher die geordneten Haltestellenkoordinaten mit geraden Abschnitten; sie bilden keine exakten Straßen- oder Gleisverläufe ab.
+
 ## Lokal starten
 
 ```sh
