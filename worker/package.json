@@ -1,0 +1,25 @@
+{
+  "name": "worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.local.jsonc",
+    "start": "wrangler dev --config wrangler.local.jsonc",
+    "deploy": "wrangler deploy",
+    "test": "vitest --pool=threads",
+    "test:workers": "vitest --config vitest.workers.config.js",
+    "test:all": "npm run test && npm run test:workers"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.12.4",
+    "vitest": "~3.2.7",
+    "wrangler": "^4.143.0"
+  },
+  "allowScripts": {
+    "workerd@1.20260926.1": true,
+    "workerd@1.20260310.1": true,
+    "esbuild@0.28.1": true,
+    "esbuild@0.27.3": true
+  }
+}
